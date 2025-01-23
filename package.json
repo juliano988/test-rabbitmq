@@ -1,0 +1,20 @@
+{
+  "name": "test-rabbitmq",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "bun build ./src/index.ts --target=bun --outdir ./build",
+    "dev": "bun --watch ./src/index.ts",
+    "start": "bun run build && bun run ./build/index.js"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.10.6",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.5"
+  }
+}
