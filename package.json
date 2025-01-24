@@ -8,7 +8,10 @@
     "start": "bun run build && bun run ./build/index.js",
     "build:receiver": "bun build ./src/receiver.ts --target=bun --outdir ./build",
     "dev:receiver": "bun --watch ./src/receiver.ts  --queue test --delayMs 1000",
-    "start:receiver": "bun run build:receiver && bun run ./build/receiver.js --queue test --delayMs 1000"
+    "start:receiver": "bun run build:receiver && bun run ./build/receiver.js --queue test --delayMs 1000",
+    "build:all": "bun run build && bun run build:receiver",
+    "dev:all": "bun run dev & bun run dev:receiver",
+    "start:all": "bun run start & bun run start:receiver"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.6",
