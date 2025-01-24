@@ -9,18 +9,19 @@ const server = Bun.serve({
 
     if (url.pathname === "/send_message" && request.method === "POST") {
       try {
-        const body: EnvelopeObject<string> = await request?.json();
+        const { queue, message }: EnvelopeObject<string> =
+          await request?.json();
 
-        if (!body.queue || !body.message) {
+        if (!queue || !message) {
           return new Response("Envelope without queue or message", {
             status: 400,
           });
         }
 
-        mqChannel.assertQueue(body.queue, {
+        mqChannel.assertQueue(queue, {
           durable: false,
         });
-        mqChannel.sendToQueue(body.queue, Buffer.from(body.message));
+        mqChannel.sendToQueue(queue, Buffer.from(message));
 
         return new Response("Message sent!");
       } catch (e) {

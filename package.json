@@ -5,7 +5,10 @@
   "scripts": {
     "build": "bun build ./src/index.ts --target=bun --outdir ./build",
     "dev": "bun --watch ./src/index.ts",
-    "start": "bun run build && bun run ./build/index.js"
+    "start": "bun run build && bun run ./build/index.js",
+    "build:receiver": "bun build ./src/receiver.ts --target=bun --outdir ./build",
+    "dev:receiver": "bun --watch ./src/receiver.ts  --queue test --delayMs 1000",
+    "start:receiver": "bun run build:receiver && bun run ./build/receiver.js --queue test --delayMs 1000"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.6",
