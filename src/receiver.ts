@@ -41,25 +41,36 @@ do {
 // To precess one message at time
 mqChannel.prefetch(1);
 
-mqChannel.consume(
-  values.queue,
-  function (message) {
-    // Simulate message processing delay
-    setTimeout(() => {
-      console.log(
-        "Received message: ",
-        message?.content.toString(),
-        "time: ",
-        new Date().toLocaleTimeString()
-      );
+try {
+  mqChannel.consume(
+    values.queue,
+    function (message) {
+      // Simulate message processing delay
+      setTimeout(() => {
+        console.log(
+          "Received message: ",
+          message?.content.toString(),
+          "time: ",
+          new Date().toLocaleTimeString()
+        );
 
-      if (message) {
-        // Acknowledge the message after processing
-        mqChannel.ack(message);
+        if (message) {
+          // Acknowledge the message after processing
+          mqChannel.ack(message);
+        }
+      }, Number(values.delayMs));
+    },
+    {
+      noAck: false,
+    },
+    (err, ok) => {
+      if (err) {
+        console.error("Error consuming the queue: ", err);
+      } else {
+        console.log("Consuming the queue: ", ok.consumerTag);
       }
-    }, Number(values.delayMs));
-  },
-  {
-    noAck: false,
-  }
-);
+    }
+  );
+} catch (e) {
+  console.error("Error consuming the queue: ", e);
+}

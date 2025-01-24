@@ -9,12 +9,9 @@ bun install
 To run:
 
 ```bash
-bun run start:all
-```
-
-To up the RabbitMq server:
-```bash
 docker compose up
+bun run start
+bun run start:receiver
 ```
 
 To access management portal:
