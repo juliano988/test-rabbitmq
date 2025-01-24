@@ -24,4 +24,19 @@ To access management portal:
 - user: guest
 - password: guest
 
+To fire a message:
+
+```bash
+curl --location --request POST 'localhost:3000/send_message' \
+--header 'Content-Type: application/json' \
+--header 'Cache-Control: no-cache' \
+--header 'Accept: */*' \
+--header 'Accept-Encoding: gzip,deflate' \
+--header 'Connection: keep-alive' \
+--data-raw '{
+  "queue": "test",
+  "message": "Mensagem de teste!"
+}'
+```
+
 This project was created using `bun init` in bun v1.1.43. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
